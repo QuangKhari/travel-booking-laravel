@@ -288,9 +288,10 @@
                                     <h5>Get In Touch</h5>
                                 </div>
                                 <ul class="list-style-one">
-                                    <li><i class="fal fa-map-marked-alt"></i> 71 Giari Phóng, Hai Bà Trưng, Hà Nội</li>
-                                    <li><i class="fal fa-envelope"></i> <a href="mailto:supportravelo@gmail.com">supportravelo @gmail.com</a></li>
-                                    <li><i class="fal fa-phone-volume"></i> <a href="callto:+00000000000">+00000000000</a></li>
+                                    <li><i class="fal fa-map-marked-alt"></i> {{ config('setting.address') }}</li>
+                                    <li><i class="fal fa-envelope"></i> <a href="mailto:supportravelo@gmail.com"> {{ config('setting.contact_email') }} </a></li>
+                                    <li><i class="fal fa-phone-volume"></i> <a href="callto:+00000000000"> {{ config('setting.hotline') }} </a></li>
+                                    <li><i class="fal fa-clock"></i> {{ config('setting.working_hours') }}</li>
                                 </ul>
                             </div>
                         </div>
