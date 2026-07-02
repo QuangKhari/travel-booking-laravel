@@ -4,7 +4,7 @@ namespace App\Http\Controllers\clients;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\clients\User;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
@@ -17,10 +17,10 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        // 1. Validate dữ liệu
+        // 1. Validate dữ liệu đầu vào
         $request->validate([
             'username_register' => 'required|string|max:255',
-            'email_register' => 'required|email|unique:users,email',
+            'email_register' => 'required|email|unique:tbl_users,email',
             'password_register' => 'required|min:6',
             're_pass' => 'required|same:password_register',
         ], [
@@ -34,9 +34,9 @@ class RegisterController extends Controller
         // 2. Lưu vào database (Sử dụng Model User của Laravel)
         // Lưu ý: Dùng đúng tên biến đã validate
         $user = User::create([
-            'name' => $request->username_register,
-            'email' => $request->email_register,
-            'password' => Hash::make($request->password_register),
+            'username' => $request->input('username_register'),
+            'email' => $request->input('email_register'),
+            'password' => Hash::make($request->input('password_register')),
         ]);
 
         // 3. Chuyển hướng về trang đăng nhập kèm thông báo

@@ -23,7 +23,9 @@ use App\Http\Controllers\admin\BookingManagementController;
 use App\Http\Controllers\admin\ReviewManagementController;
 use App\Http\Controllers\admin\AdminManagementController;
 use App\Http\Controllers\admin\PromotionManagementController;
-
+use App\Http\Controllers\clients\LoginController;
+use App\Http\Controllers\clients\RegisterController;
+use App\Http\Controllers\clients\ForgotPasswordController;
 
 
 

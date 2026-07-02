@@ -4,9 +4,8 @@ namespace App\Http\Controllers\clients;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User; // Dùng Model User chuẩn của Laravel
+use App\Models\clients\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth; // Tùy chọn, nếu bạn dùng Auth::attempt
 
 class LoginController extends Controller
 {
@@ -45,8 +44,8 @@ class LoginController extends Controller
             }
 
             // Đăng nhập thành công, lưu session
-            $request->session()->put('userId', $user->id);
-            $request->session()->put('username', $user->name);
+            $request->session()->put('userId', $user->userId);
+            $request->session()->put('username', $user->username);
             return redirect()->route('home');
         } else {
             return redirect()->back()

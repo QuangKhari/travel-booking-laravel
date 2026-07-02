@@ -13,6 +13,9 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $table = 'tbl_users';
+    protected $primaryKey = 'userId';
+
     /**
      * The attributes that are mass assignable.
      *

@@ -5,10 +5,32 @@ namespace App\Models\clients;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Model
 {
+    use Notifiable;
+
     protected $table = 'tbl_users';
+    protected $primaryKey = 'userId';
+    protected $fillable = [
+        'fullName',
+        'username',
+        'email',
+        'password',
+        'avatar',
+        'phoneNumber',
+        'address',
+        'ipAdress',
+        'isActive',
+        'status',
+    ];
+    const CREATED_AT = 'createdDate';
+    const UPDATED_AT = 'updatedDate';
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
 
     public function getUserId($username)
