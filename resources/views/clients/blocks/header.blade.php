@@ -148,6 +148,7 @@
                                             <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
                                             
                                         @else
+                                            <li><a href="{{ route('register') }}">Đăng ký</a></li>
                                             <li><a href="{{ route('login') }}">Đăng nhập</a></li>
                                         @endif
                                     </ul>

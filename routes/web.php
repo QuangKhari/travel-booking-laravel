@@ -11,7 +11,6 @@ use App\Http\Controllers\clients\ToursController;
 use App\Http\Controllers\clients\TourDetailController;
 use App\Http\Controllers\clients\BlogController;
 use App\Http\Controllers\clients\BlogDetailController;
-use App\Http\Controllers\clients\LoginController;
 use App\Http\Controllers\clients\SearchController;
 use App\Http\Controllers\clients\UserProfileController;
 use App\Http\Controllers\clients\TourBookedController;
@@ -24,9 +23,8 @@ use App\Http\Controllers\admin\BookingManagementController;
 use App\Http\Controllers\admin\ReviewManagementController;
 use App\Http\Controllers\admin\AdminManagementController;
 use App\Http\Controllers\admin\PromotionManagementController;
-
-
-
+use App\Http\Controllers\clients\LoginController;
+use App\Http\Controllers\clients\RegisterController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
@@ -42,7 +40,10 @@ Route::get('/search-voice-text', [SearchController::class, 'searchTours'])->name
 //Đăng nhập, đăng ký, đăng xuất
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('user-login');
-Route::post('/register', [LoginController::class, 'register'])->name('register');
+
+Route::get('/register', [RegisterController::class, 'showRegistration'])->name('register');
+Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
+
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
