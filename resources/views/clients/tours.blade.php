@@ -289,8 +289,8 @@
                                 </div>
                                 <ul class="list-style-one">
                                     <li><i class="fal fa-map-marked-alt"></i> {{ config('setting.address') }}</li>
-                                    <li><i class="fal fa-envelope"></i> <a href="mailto:supportravelo@gmail.com"> {{ config('setting.contact_email') }} </a></li>
-                                    <li><i class="fal fa-phone-volume"></i> <a href="callto:+00000000000"> {{ config('setting.hotline') }} </a></li>
+                                    <li><i class="fal fa-envelope"></i> <a href="mailto:{{ config('setting.contact_email') }}"> {{ config('setting.contact_email') }} </a></li>
+                                    <li><i class="fal fa-phone-volume"></i> <a href="callto:{{ config('setting.hotline') }}"> {{ config('setting.hotline') }} </a></li>
                                     <li><i class="fal fa-clock"></i> {{ config('setting.working_hours') }}</li>
                                 </ul>
                             </div>

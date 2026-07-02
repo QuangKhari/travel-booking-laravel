@@ -49,7 +49,7 @@
                             <div class="section-title mb-25">
                                 <h2>Top lí do chúng tôi được tin tưởng </h2>
                             </div>
-                            <p>Chúng tôi se luôn nỗ lực để mang đến cho bạn những trải nghiệm du lịch tuyệt vời nhất, khám phá những điểm đến bí mật và những địa điểm không thể bỏ qua.</p>
+                            <p>Chúng tôi sẽ luôn nỗ lực để mang đến cho bạn những trải nghiệm du lịch tuyệt vời nhất, khám phá những điểm đến bí mật và những địa điểm không thể bỏ qua.</p>
                             <div class="divider counter-text-wrap mt-45 mb-55"><span>Chúng tôi có <span><span class="count-text plus" data-speed="3000" data-stop="5">0</span> Năm</span> kinh nghiệm</span></div>
                             <div class="row">
                                 <div class="col-6">

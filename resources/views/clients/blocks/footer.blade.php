@@ -73,7 +73,7 @@
                     <div class="row">
                        <div class="col-lg-5">
                             <div class="copyright-text text-center text-lg-start">
-                                <p>@Copy {{ config('setting.copyright') }} <a href="index.html">Ravelo</a>, All rights reserved</p>
+                                <p>@Copy {{ config('setting.copyright') }} <a href="/"> {{ config('setting.site_name') }} </a>, All rights reserved</p>
                             </div>
                        </div>
                        <div class="col-lg-7 text-center text-lg-end">
