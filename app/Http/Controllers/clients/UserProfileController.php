@@ -4,104 +4,122 @@ namespace App\Http\Controllers\clients;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\clients\User;
-
+use App\Models\User; // ĐỒNG BỘ: Dùng Model User chuẩn giống LoginController
 
 class UserProfileController extends Controller
 {
-     public function __construct()
+    public function __construct()
     {
-        parent::__construct(); // Gọi constructor của Controller để khởi tạo $user
+        parent::__construct();
     }
-
 
     public function index()
     {
-
         $title = 'Thông tin cá nhân';
-        $userId = $this->getUserId();
-        $user = $this->user->getUser($userId);
-        //dd(session()->all());
+        $userId = $this->getUserId(); // Lấy userId từ session của bạn
 
+        // 1. Kiểm tra nếu chưa đăng nhập
         if (!$userId) {
-            return redirect('/login')->withErrors('User not found');
+            return redirect('/login')->withErrors('Bạn cần đăng nhập để truy cập trang này.');
         }
 
-        $user = $this->user->getUser($userId);
+        // 2. Lấy user từ DB bằng Eloquent chuẩn của Laravel
+        $user = User::find($userId);
+
+        // 3. Kiểm tra nếu user không tồn tại trong DB
+        if (!$user) {
+            // Xóa toàn bộ session liên quan đến đăng nhập
+            session()->forget(['userId', 'username', 'avatar']);
+            return redirect('/login')->withErrors('Tài khoản không tồn tại.');
+        }
+
         return view('clients.user-profile', compact('title', 'user'));
     }
-    public function update(Request $req){
-        $fullName = $req->fullName;
-        $address = $req->address;
-        $email = $req->email;
-        $phone = $req->phone;
-        $username =session()->get('username');
-        $userId = $this->user->getUserId($username);
+    
+    public function update(Request $req)
+    {
+        $userId = $this->getUserId();
+        $user = User::find($userId);
+
+        if (!$user) {
+            return response()->json(['error' => true, 'message' => 'Người dùng không tồn tại!'], 404);
+        }
 
         $dataUpdate = [
-            'fullName' => $fullName,
-            'address' => $address,
-            'email' => $email,
-            'phoneNumber' => $phone
+            'fullName'    => $req->fullName,
+            'address'     => $req->address,
+            'email'       => $req->email,
+            'phoneNumber' => $req->phone
         ];
-        $userId = $this->getUserId();
-        $update = $this->user->updateUser($userId, $dataUpdate);
-        if (!$update) {
-                return response()->json(['error' => true, 'message' => 'Mật khẩu mới trùng với mật khẩu cũ!']);
-        }
-        return response()->json(['success' => true, 'message' => 'Cập nhật thông tin thành công!']);
 
+        // Thực hiện cập nhật bằng Eloquent
+        $update = $user->update($dataUpdate);
+
+        if (!$update) {
+            return response()->json(['error' => true, 'message' => 'Cập nhật thông tin thất bại!']);
+        }
+
+        // Cập nhật lại session tên hiển thị phòng trường hợp người dùng đổi tên mới
+        session()->put('username', $req->fullName);
+
+        return response()->json(['success' => true, 'message' => 'Cập nhật thông tin thành công!']);
     }
+
     public function changePassword(Request $req)
     {
         $userId = $this->getUserId();
-        $user = $this->user->getUser($userId);
+        $user = User::find($userId);
 
+        if (!$user) {
+            return response()->json(['error' => true, 'message' => 'Không tìm thấy người dùng!'], 404);
+        }
+
+        // Kiểm tra mật khẩu cũ (Giữ nguyên thuật toán MD5 theo code hiện tại của bạn)
         if (md5($req->oldPass) === $user->password) {
-            $update = $this->user->updateUser($userId, ['password' => md5($req->newPass)]);
+            $update = $user->update(['password' => md5($req->newPass)]);
+            
             if (!$update) {
-                return response()->json(['error' => true, 'message' => 'Mật khẩu mới trùng với mật khẩu cũ!']);
-            } else {
-                return response()->json(['success' => true, 'message' => 'Đổi mật khẩu thành công!']);
-
+                return response()->json(['error' => true, 'message' => 'Đổi mật khẩu thất bại!']);
             }
+            return response()->json(['success' => true, 'message' => 'Đổi mật khẩu thành công!']);
         } else {
-            return response()->json(['error' => true, 'message' => 'Mật khẩu cũ không chính xác.'], 500);
+            return response()->json(['error' => true, 'message' => 'Mật khẩu cũ không chính xác.'], 400);
         }
     }
+
     public function changeAvatar(Request $req)
     {
         $userId = $this->getUserId();
+        $user = User::find($userId);
+
+        if (!$user) {
+            return response()->json(['error' => true, 'message' => 'Không tìm thấy người dùng!'], 404);
+        }
 
         $req->validate([
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120', // 5MB
         ]);
 
-        // Lấy tệp ảnh
         $avatar = $req->file('avatar');
+        $filename = time() . '.' . $avatar->getClientOriginalExtension();
 
-        // Tạo tên mới cho tệp ảnh
-        $filename = time() . '.' . $avatar->getClientOriginalExtension(); // Tên tệp mới theo thời gian
-
-        $user = $this->user->getUser($userId);
         if ($user->avatar) {
-            // Đường dẫn đến ảnh cũ
             $oldAvatarPath = public_path('admin/assets/images/user-profile/' . $user->avatar);
-
-            // Kiểm tra tệp cũ có tồn tại và xóa nếu có
             if (file_exists($oldAvatarPath)) {
                 unlink($oldAvatarPath);
             }
         }
 
-        // Di chuyển ảnh vào thư mục public/admin/assets/images/user-profile/
         $avatar->move(public_path('admin/assets/images/user-profile'), $filename);
-        $update = $this->user->updateUser($userId, ['avatar' => $filename]);
-        $req->session()->put('avatar', $filename);
+        
+        // Cập nhật tên file ảnh vào DB
+        $update = $user->update(['avatar' => $filename]);
+        
         if (!$update) {
             return response()->json(['error' => true, 'message' => 'Có vấn đề khi cập nhật ảnh!']);
         }
+
+        $req->session()->put('avatar', $filename);
         return response()->json(['success' => true, 'message' => 'Cập nhật ảnh thành công!']);
     }
-    
 }

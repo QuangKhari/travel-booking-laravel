@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
                                 <input type="password" name="re_pass" id="re_pass" placeholder="Xác nhận mật khẩu" />
-                                <i class="zmdi zmdi-eye toggle-password" toggle="#password_register"></i>
+                                <i class="zmdi zmdi-eye toggle-password" toggle="#re_pass"></i>
                             </div>
                             @error('re_pass')
                             <div style="margin-top:-15px; color: red;">{{ $message }}</div>
@@ -61,28 +61,6 @@
     </div>
 </div>
 
-<!-- Di chuyển vào file .js riêng -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const toggleIcons = document.querySelectorAll('.toggle-password');
-
-        toggleIcons.forEach(icon => {
-            icon.addEventListener('click', function() {
-                // Lấy id input từ thuộc tính toggle
-                const inputId = this.getAttribute('toggle');
-                const input = document.querySelector(inputId);
-
-                // Đổi type của input
-                if (input.getAttribute('type') === 'password') {
-                    input.setAttribute('type', 'text');
-                    this.classList.replace('zmdi-eye', 'zmdi-eye-off'); // Đổi icon mắt gạch
-                } else {
-                    input.setAttribute('type', 'password');
-                    this.classList.replace('zmdi-eye-off', 'zmdi-eye'); // Đổi icon mắt thường
-                }
-            });
-        });
-    });
-</script>
+<script src="{{ asset('clients/assets/js/custom-js.js') }}"></script>
 
 @include('clients.blocks.footer')

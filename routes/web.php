@@ -37,13 +37,17 @@ Route::get('/blog-detail', [BlogDetailController::class, 'index'])->name('blog-d
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 Route::get('/search-voice-text', [SearchController::class, 'searchTours'])->name('search-voice-text');
 
-//Đăng nhập, đăng ký, đăng xuất
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'login'])->name('user-login');
+// Middle kiểm tra người dùng đã đăng nhập hay chưa
+// Đăng ký, đăng nhập
+Route::middleware(['web', 'checkLogin'])->group(function () {
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'login'])->name('user-login');
 
-Route::get('/register', [RegisterController::class, 'showRegistration'])->name('register');
-Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
+    Route::get('/register', [RegisterController::class, 'showRegistration'])->name('register');
+    Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
+});
 
+// Đăng xuất
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
@@ -154,4 +158,3 @@ Route::prefix('admin')->group(function () {
         Route::post('/delete-manager', [AdminManagementController::class, 'deleteManager'])->name('admin.delete-manager');
     });
 });
-

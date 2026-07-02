@@ -21,6 +21,8 @@ return Application::configure(basePath: dirname(__DIR__))
 
         'checkAdminRole'   => \App\Http\Middleware\CheckAdminRole::class,
 
+        'checkLogin' => \App\Http\Middleware\CheckLogin::class
+
     ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

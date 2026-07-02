@@ -5,12 +5,18 @@ namespace App\Models\clients;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
+use Database\Factories\TourFactory;
 
 class Tours extends Model
 {
     use HasFactory;
 
     protected $table = 'tbl_tours';
+
+    protected static function newFactory()
+    {
+        return TourFactory::new();
+    }
 
     // Lấy tất cả các tour
     public function getAllTours()

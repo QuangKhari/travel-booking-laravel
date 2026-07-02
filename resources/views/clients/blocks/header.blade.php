@@ -107,9 +107,9 @@
                                         <li class="{{ Request::url() == route('contact') ? 'active' : '' }}">
                                             <a href="{{ route('contact') }}">Liên hệ</a>
                                         </li>
-                                        <li class="{{ Request::url() == route('blogs') ? 'active' : '' }}">
+                                        <!-- <li class="{{ Request::url() == route('blogs') ? 'active' : '' }}">
                                             <a href="{{ route('blogs') }}">Blog</a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
 

@@ -20,19 +20,26 @@
                         </div>
                         @endif
 
+                        @if ($errors->has('login_error'))
+                        <div class="alert alert-danger" style="color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; margin-bottom: 20px; padding: 10px; border-radius: 5px; font-weight: bold;">
+                            {{ $errors->first('login_error') }}
+                        </div>
+                        @endif
+
                         <form action="{{ route('user-login') }}" method="POST" class="login-form" id="login-form1">
                             @csrf
                             <div class="form-group">
-                                <label for="username_login"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="username_login" id="username_login" placeholder="Tên người dùng" />
+                                <label for="email_login"><i class="zmdi zmdi-email"></i></label>
+                                <input type="email" name="email_login" id="email_login" placeholder="Email" required />
                             </div>
-                            <div class="invalid-feedback" style="margin-top: -15px" id="validate_username"></div>
+                            @error('email_login') <div class="text-danger">{{ $message }}</div> @enderror
 
                             <div class="form-group">
                                 <label for="password_login"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="password_login" id="password_login" placeholder="Mật khẩu" />
+                                <input type="password" name="password_login" id="password_login" placeholder="Mật khẩu" required />
+                                <i class="zmdi zmdi-eye toggle-password" toggle="#password_login"></i>
                             </div>
-                            <div class="invalid-feedback" style="margin-top:-15px" id="validate_password"></div>
+                            @error('password_login') <div class="text-danger">{{ $message }}</div> @enderror
 
                             <div class="form-group form-button">
                                 <input type="submit" name="signin" id="signin" class="form-submit" value="Đăng nhập" />
@@ -44,5 +51,7 @@
         </section>
     </div>
 </div>
+
+<script src="{{ asset('clients/assets/js/custom-js.js') }}"></script>
 
 @include('clients.blocks.footer')
