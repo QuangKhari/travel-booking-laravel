@@ -6,10 +6,10 @@
                         <div class="col col-small" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
                             <div class="footer-widget footer-text">
                                 <div class="footer-logo mb-40">
-                                    <a href="index.html"><img src="assets/images/logos/logo.png" alt="Logo"></a>
+                                    <a href="/"><img src="{{ asset('clients/assets/images/logos/logo.png') }}" alt="Logo"></a>
                                 </div>
                                 <div class="footer-map">
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29799.20133386247!2d105.82692641284181!3d20.996638605896663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac71294bf0ab%3A0xc7e2d20e5e04a9da!2zxJDhuqFpIEjhu41jIELDoWNoIEtob2EgSMOgIE7hu5lp!5e0!3m2!1svi!2s!4v1779253901855!5m2!1svi!2s" style="border:0; width: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    <iframe src="{{ config('setting.google_map_embed') }}" style="border:0; width: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 </div>
                             </div>
                         </div>
@@ -58,9 +58,10 @@
                                     <h5>Get In Touch</h5>
                                 </div>
                                 <ul class="list-style-one">
-                                    <li><i class="fal fa-map-marked-alt"></i> 578 Level, D-block 45 Street Melbourne, Australia</li>
-                                    <li><i class="fal fa-envelope"></i> <a href="mailto:supportrevelo@gmail.com">supportrevelo @gmail.com</a></li>
-                                    <li><i class="fal fa-phone-volume"></i> <a href="callto:+88012334588">+880 (123) 345 88</a></li>
+                                    <li><i class="fal fa-map-marked-alt"></i> {{ config('setting.address') }}</li>
+                                    <li><i class="fal fa-envelope"></i> <a href="mailto:supportrevelo@gmail.com"> {{ config('setting.contact_email') }} </a></li>
+                                    <li><i class="fal fa-phone-volume"></i> <a href="callto:+88012334588"> {{ config('setting.hotline') }} </a></li>
+                                    <li><i class="fal fa-clock"></i> {{ config('setting.working_hours') }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -72,7 +73,7 @@
                     <div class="row">
                        <div class="col-lg-5">
                             <div class="copyright-text text-center text-lg-start">
-                                <p>@Copy 2024 <a href="index.html">Ravelo</a>, All rights reserved</p>
+                                <p>@Copy {{ config('setting.copyright') }} <a href="/"> {{ config('setting.site_name') }} </a>, All rights reserved</p>
                             </div>
                        </div>
                        <div class="col-lg-7 text-center text-lg-end">

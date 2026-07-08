@@ -97,10 +97,10 @@
                                     <h5>Get In Touch</h5>
                                 </div>
                                 <ul class="list-style-one">
-                                    <li><i class="fal fa-map-marked-alt"></i> 578 Level, D-block 45 Street Melbourne, Australia</li>
-                                    <li><i class="fal fa-envelope"></i> <a href="mailto:supportrevelo@gmail.com">supportrevelo@gmail.com</a></li>
-                                    <li><i class="fal fa-clock"></i> Mon - Fri, 08am - 05pm</li>
-                                    <li><i class="fal fa-phone-volume"></i> <a href="callto:+88012334588">+880 (123) 345 88</a></li>
+                                    <li><i class="fal fa-map-marked-alt"></i> {{ config('setting.address') }}</li>
+                                    <li><i class="fal fa-envelope"></i> <a href="mailto:supportrevelo@gmail.com"> {{ config('setting.contact_email') }} </a></li>
+                                    <li><i class="fal fa-clock"></i> {{ config('setting.working_hours') }}</li>
+                                    <li><i class="fal fa-phone-volume"></i> <a href="callto:+88012334588"> {{ config('setting.hotline') }} </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -112,7 +112,7 @@
                     <div class="row">
                        <div class="col-lg-5">
                             <div class="copyright-text text-center text-lg-start">
-                                <p>@Copy 2024 <a href="{{ route('home') }}">Travela</a>, All rights reserved</p>
+                                <p>@Copy {{ config('setting.copyright') }} <a href="{{ route('home') }}">Travela</a>, All rights reserved</p>
                             </div>
                        </div>
                        <div class="col-lg-7 text-center text-lg-end">

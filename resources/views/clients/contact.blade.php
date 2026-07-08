@@ -50,8 +50,8 @@
                                 <div class="contact-info-item" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50" data-aos-delay="50">
                                     <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
                                     <div class="content">
-                                        <h5>TP.HCM</h5>
-                                        <div class="text"><i class="fal fa-map-marker-alt"></i> 456 Đường DEF, Quận UVW, TP.HCM, Việt Nam</div>
+                                        <h5>Trợ giúp và hỗ trợ</h5>
+                                        <div class="text"><i class="far fa-envelope"></i> <a href="mailto:0005367@st.huce.edu.vn">0005367@st.huce.edu.vn</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                     <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
                                     <div class="content">
                                         <h5>Hà Nội</h5>
-                                        <div class="text"><i class="fal fa-map-marker-alt"></i> 123 Đường ABC, Quận XYZ, Hà Nội, Việt Nam</div>
+                                        <div class="text"><i class="fal fa-map-marker-alt"></i> {{ config('setting.address') }} </div>
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +152,7 @@
         
         <!-- Contact Map Start -->
         <div class="contact-map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29799.20133386247!2d105.82692641284181!3d20.996638605896663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac71294bf0ab%3A0xc7e2d20e5e04a9da!2zxJDhuqFpIEjhu41jIELDoWNoIEtob2EgSMOgIE7hu5lp!5e0!3m2!1svi!2s!4v1779253901855!5m2!1svi!2s" style="border:0; width: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="{{ config('setting.google_map_embed') }}" style="border:0; width: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <!-- Contact Map End -->
 
